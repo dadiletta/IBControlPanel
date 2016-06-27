@@ -30,7 +30,7 @@ void setup() {
     //Does a welcoming animation go here?
 
     Particle.function("goPats", goPats);
-    Particle.subscribe("hook-response/response", overwatch);
+    Particle.subscribe("hook-response/response", overwatch, MY_DEVICES);
     
     // Tell b to get everything ready to go
     // Use b.begin(1); if you have the original SparkButton, which does not have a buzzer or a plastic enclosure
@@ -178,6 +178,14 @@ void loop(){
             }
             break;   
         default:
+            if(b.buttonOn(2)){
+                Particle.publish("response", "yes", PRIVATE);  //DOES THIS WORK? no...
+                delay(60000);
+            }
+            else if(b.buttonOn(4)){
+                Particle.publish("response", "no", PRIVATE); //This ends up sending a green dot?
+                delay(60000);
+            }
             break;
     } //closes mode switch
     
@@ -215,7 +223,7 @@ void overwatch(const char *event, const char *data){
         b.ledOff(x);
     }
     if(strcmp (data, "yes")){
-        b.ledOn(overwatchCounter, 0, 0, 255);
+        b.ledOn(overwatchCounter, 0, 255, 0);
     }
     else{
         b.ledOn(overwatchCounter, 255, 0, 0);
