@@ -161,14 +161,15 @@ void loop(){
             break;   
         case 5:  //SUMMON OVERWATCH
             b.allLedsOn(30,155,51); 
+            //animates the lights by turning off one at a time in a circle
             cirlceOff();
             if(b.buttonOn(2)){
-                Particle.publish("response", "yes", PRIVATE);
+                Particle.publish("response", "yes", PRIVATE);  //DOES THIS WORK? no...
                 delay(60000);
             }
             else if(b.buttonOn(3)){
                 mode = MODEMAX+1;
-                Particle.publish("Mode4Action2");
+                Particle.publish("Mode4Action2"); //NOT CONFIGURED
                 delay(PAUSE);
             }
             else if(b.buttonOn(4)){
@@ -203,6 +204,8 @@ void loop(){
 // ----IFTTT FUNCTIONS---------
 // ----------------------------
 
+
+//!!!PROBLEM... how do I handle the data? 
 
 void overwatch(const char *event, const char *data){
     //Switch modes so the mode lights won't overwrite the replies
