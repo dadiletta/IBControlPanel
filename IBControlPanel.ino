@@ -222,10 +222,10 @@ void overwatch(const char *event, const char *data){
     for(int x = overwatchCounter; x < 12; x++){
         b.ledOff(x);
     }
-    if(strcmp (data, "yes")){
+    if(strcmp(data, "yes")){
         b.ledOn(overwatchCounter, 0, 255, 0);
     }
-    else{
+    else if (strcmp(data, "no")){
         b.ledOn(overwatchCounter, 255, 0, 0);
     }
     overwatchCounter++;
